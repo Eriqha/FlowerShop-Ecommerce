@@ -1,0 +1,8 @@
+;/*FB_PKG_DELIM*/
+
+__d("FDSAppMessengerFilled20Icon",["cr:14341"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:14341")}),98);
+__d("FDSAppMessengerFilled20PNGIcon.react",["ix","fbicon"],(function(t,n,r,o,a,i,l,s){"use strict";var e=o("fbicon")._(s("505617"),20),u=e;l.default=u}),98);
+__d("FDSPinLocationFilled20Icon",["cr:15428"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:15428")}),98);
+__d("FDSStarCircleFilled20PNGIcon.react",["ix","fbicon"],(function(t,n,r,o,a,i,l,s){"use strict";var e=o("fbicon")._(s("808603"),20),u=e;l.default=u}),98);
+__d("FDSStarFilled20Icon",["cr:15698"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:15698")}),98);
+__d("FDSStarFilled20PNGIcon.react",["ix","fbicon"],(function(t,n,r,o,a,i,l,s){"use strict";var e=o("fbicon")._(s("479327"),20),u=e;l.default=u}),98);
