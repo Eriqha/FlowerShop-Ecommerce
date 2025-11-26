@@ -10,6 +10,10 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import AnniversaryCollection from '../pages/AnniversaryCollection';
 import Account from '../pages/Account';
+import AdminOrders from '../pages/AdminOrders';
+import AdminReceipts from '../pages/AdminReceipts';
+import AdminRoute from '../components/AdminRoute';
+import AdminProducts from '../pages/AdminProducts';
 import BirthdayCollection from "../pages/BirthdayCollection";
 import CongratulationsCollection from "../pages/CongratulationsCollection";
 import GetWellSoonCollection from "../pages/GetWellSoonCollection";
@@ -39,6 +43,9 @@ const AppRouter = () => {
       <Route path="/collections/romantic" element={<RomanticCollection />} />
       <Route path="/collections/sympathy-funeral" element={<SympathyFuneralCollection />} />
       <Route path="/collections/thank-you" element={<ThankYouCollection />} />
+      <Route path="/admin/orders" element={<AdminRoute><AdminOrders /></AdminRoute>} />
+      <Route path="/admin/receipts" element={<AdminRoute><AdminReceipts /></AdminRoute>} />
+      <Route path="/admin/products" element={<AdminRoute><AdminProducts /></AdminRoute>} />
     </Routes>
   );
 };

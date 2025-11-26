@@ -21,14 +21,36 @@ const Checkout = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const total = cartItems.reduce((s, i) => s + i.product.price * i.quantity, 0);
+  const total = cartItems.reduce((s, i) => {
+    const base = i.product.price * i.quantity;
+    const addOnsTotal = (i.addOns || []).reduce((aSum, a) => {
+      const addonObj = i.product.addOns?.find(x => x._id === a.addOnId || x._id === a.addOnId) || i.product.addOns?.find(x => x._id === a.addOn);
+      const addonPrice = addonObj ? Number(addonObj.price || addonObj) : Number(a.price || 0);
+      const perItemQty = Number(a.quantity || 1);
+      return aSum + addonPrice * perItemQty * i.quantity;
+    }, 0);
+    return s + base + addOnsTotal;
+  }, 0);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const submitOrder = async (e) => {
     e.preventDefault();
     if (cartItems.length === 0) return alert('Cart is empty');
-    const items = cartItems.map(i => ({ product: i.product._id, quantity: i.quantity, price: i.product.price }));
+    const items = cartItems.map(i => ({ 
+      product: i.product._id, 
+      quantity: i.quantity, 
+      price: i.product.price,
+      addOns: (i.addOns || []).map(a => {
+        const addonObj = i.product.addOns?.find(x => x._id === a.addOnId || x._id === a.addOn) || null;
+        return {
+          addOn: a.addOnId || a.addOn,
+          quantity: a.quantity || 1,
+          price: addonObj ? Number(addonObj.price || 0) : Number(a.price || 0),
+          customMessage: a.customMessage || ''
+        };
+      })
+    }));
     const payload = {
       items,
       total,
@@ -119,7 +141,12 @@ const Checkout = () => {
           <ul className="list-unstyled">
             {cartItems.map(i => (
               <li key={i.product._id} className="d-flex justify-content-between align-items-center mb-2">
-                <div>
+                <div className="d-flex align-items-center">
+                  <img
+                    src={i.product.images?.[0] || '/assets/placeholder.jpg'}
+                    alt={i.product.name}
+                    style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '8px', marginRight: '10px' }}
+                  />
                   <small>{i.product.name} × {i.quantity}</small>
                 </div>
                 <div><strong>₱{(i.product.price * i.quantity).toFixed(2)}</strong></div>

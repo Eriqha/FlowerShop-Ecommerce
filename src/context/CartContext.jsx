@@ -1,5 +1,6 @@
 // src/context/CartContext.jsx
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
+import { AuthContext } from './AuthContext';
 
 export const CartContext = createContext();
 
@@ -11,7 +12,15 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
+  const { user } = useContext(AuthContext);
+
   const addToCart = (item) => {
+    // Only allow adding to cart for logged in users
+    if (!user) {
+      // Tell user to login
+      alert('Please login to add items to the cart');
+      return;
+    }
     if (!item || !item.product || !item.product._id) return;
 
     setCartItems(prev => {

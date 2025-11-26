@@ -42,7 +42,7 @@ const Home = () => {
         style={{
           background: '#f45c5c',
           color: 'white',
-          padding: '70px 0',
+          padding: '60px 0',
           textAlign: 'center',
         }}
       >

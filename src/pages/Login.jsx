@@ -14,8 +14,13 @@ const Login = () => {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      await login(form.email, form.password);
-      navigate('/');
+      const res = await login(form.email, form.password);
+      // navigate based on role
+      if (res.user?.role === 'admin') {
+        navigate('/admin/orders');
+      } else {
+        navigate('/');
+      }
     } catch (error) {
       setErr(error.response?.data?.message || 'Login failed');
     }

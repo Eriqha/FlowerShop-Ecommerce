@@ -1,0 +1,13 @@
+;/*FB_PKG_DELIM*/
+
+__d("CometSaveLoggingContext",["react"],(function(t,n,r,o,a,i,l){"use strict";var e,s=e||(e=o("react")),u=s.createContext({collectionID:null,referrer:null,surface:"dashboard",surfaceGraphQL:"DASHBOARD",surfaceGraphQL_legacy:"dashboard"});l.default=u}),98);
+__d("FDSBookmarkFilled20Icon",["cr:14547"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:14547")}),98);
+__d("FDSBookmarkFilled20PNGIcon.react",["ix","fbicon"],(function(t,n,r,o,a,i,l,s){"use strict";var e=o("fbicon")._(s("495598"),20),u=e;l.default=u}),98);
+__d("FDSBoxFilled20Icon",["cr:14558"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:14558")}),98);
+__d("FDSBoxFilled20PNGIcon.react",["ix","fbicon"],(function(t,n,r,o,a,i,l,s){"use strict";var e=o("fbicon")._(s("637461"),20),u=e;l.default=u}),98);
+__d("FDSFeedsFilled20Icon",["cr:14010"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:14010")}),98);
+__d("FDSFeedsFilled20PNGIcon.react",["ix","fbicon"],(function(t,n,r,o,a,i,l,s){"use strict";var e=o("fbicon")._(s("647441"),20),u=e;l.default=u}),98);
+__d("FDSGlobeAmericasFilled12Icon",["cr:15059"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:15059")}),98);
+__d("FDSGlobeAmericasFilled12PNGIcon.react",["ix","fbicon"],(function(t,n,r,o,a,i,l,s){"use strict";var e=o("fbicon")._(s("560118"),12),u=e;l.default=u}),98);
+__d("XCometSaveDashboardControllerRouteBuilder",["jsRouteBuilder"],(function(t,n,r,o,a,i,l){var e=r("jsRouteBuilder")("/saved/",Object.freeze({unlisted_only:!1}),void 0),s=e;l.default=s}),98);
+__d("useCometSaveLoggingContext",["CometSaveLoggingContext","react"],(function(t,n,r,o,a,i,l){"use strict";var e,s=(e||(e=o("react"))).useContext;function u(){return s(r("CometSaveLoggingContext"))}l.default=u}),98);
