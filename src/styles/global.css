@@ -1,0 +1,34 @@
+/* src/styles/global.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-img-top {
+  object-fit: cover;
+}
+
+/* subtle hover for product cards */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: all 150ms ease;
+}
+
+.fade-slide-up {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeSlideUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
