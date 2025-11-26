@@ -6,7 +6,15 @@ const OrderSchema = new mongoose.Schema({
         {
             product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
             quantity: { type: Number, required: true },
-            price: { type: Number, required: true }
+            price: { type: Number, required: true },
+            addOns: [
+                {
+                    addOn: { type: mongoose.Schema.Types.ObjectId, ref: 'AddOn' },
+                    quantity: { type: Number, default: 1 },
+                    price: { type: Number, default: 0 },
+                    customMessage: { type: String }
+                }
+            ]
         }
     ],
     total: { type: Number, required: true },
@@ -19,7 +27,18 @@ const OrderSchema = new mongoose.Schema({
     address: { type: String, required: true },
     messageCard: String,
     specialInstructions: String,
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    // Admin related fields
+    status: {
+        type: String,
+        enum: ['pending', 'approved', 'declined', 'completed'],
+        default: 'pending'
+    },
+    receipt: { type: String }, // URL or path to uploaded receipt image
+    receiptHtml: { type: String }, // inline HTML string of the generated receipt
+    approvedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    approvedAt: { type: Date },
+    completedAt: { type: Date }
 });
 
-module.exports = mongoose.model('Order', OrderSchema);
+module.exports = mongoose.models.Order || mongoose.model('Order', OrderSchema);

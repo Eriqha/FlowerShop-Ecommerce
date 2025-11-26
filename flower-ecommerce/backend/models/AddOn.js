@@ -8,4 +8,4 @@ const AddOnSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('AddOn', AddOnSchema);
+module.exports = mongoose.models.AddOn || mongoose.model('AddOn', AddOnSchema);

@@ -7,7 +7,9 @@ const ProductSchema = new mongoose.Schema({
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
     description: String,
     slug: { type: String, required: true, unique: true },
-    addOns: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AddOn' }]
+    addOns: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AddOn' }],
+    stockQuantity: { type: Number, default: 0 },
+    isActive: { type: Boolean, default: true }
 });
 
-module.exports = mongoose.model('Products', ProductSchema);
+module.exports = mongoose.models.Product || mongoose.model('Product', ProductSchema);

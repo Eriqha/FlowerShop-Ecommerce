@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    role: { type: String, default: 'user' } // user or admin
+    role: { type: String, enum: ['user','admin'], default: 'user' } // user or admin
 });
 
 // Encrypt password before save
@@ -21,4 +21,4 @@ UserSchema.methods.matchPassword = async function(password) {
     return await bcrypt.compare(password, this.password);
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.models.User || mongoose.model('User', UserSchema);

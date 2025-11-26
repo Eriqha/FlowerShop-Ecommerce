@@ -1,5 +1,7 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const path = require('path');
+const fs = require('fs');
 
 // GET all products
 exports.getProducts = async (req, res) => {
@@ -46,6 +48,8 @@ exports.getProductById = async (req, res) => {
 // CREATE product
 exports.createProduct = async (req, res) => {
   try {
+    // ensure slug is unique (basic)
+    if (!req.body.slug && req.body.name) req.body.slug = req.body.name.toLowerCase().replace(/\s+/g, '-');
     const product = await Product.create(req.body);
     const populatedProduct = await Product.findById(product._id)
                                           .populate('category')
@@ -70,6 +74,41 @@ exports.updateProduct = async (req, res) => {
     }
 
     res.json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// SOFT DELETE product (mark inactive)
+exports.deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: 'Product not found' });
+    product.isActive = false;
+    await product.save();
+    res.json({ message: 'Product marked inactive' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Upload single image and attach to product.images
+exports.uploadProductImage = async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      // remove uploaded file if product not found
+      try { fs.unlinkSync(req.file.path); } catch (e) {}
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    // store relative path for frontend to load
+    const rel = `/uploads/products/${req.file.filename}`;
+    product.images = product.images || [];
+    product.images.push(rel);
+    await product.save();
+    const populated = await Product.findById(product._id).populate('category').populate('addOns');
+    res.json(populated);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

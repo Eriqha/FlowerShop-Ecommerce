@@ -13,6 +13,7 @@ exports.register = async (req, res) => {
 
         res.status(201).json({ 
             user: { 
+                _id: user._id,
                 id: user._id, 
                 name: user.name, 
                 email: user.email, 
@@ -38,6 +39,7 @@ exports.login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
         res.json({ 
             user: { 
+                _id: user._id,
                 id: user._id, 
                 name: user.name, 
                 email: user.email, 
